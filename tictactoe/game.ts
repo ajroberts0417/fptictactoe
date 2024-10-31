@@ -1,16 +1,5 @@
 
-export type Cell = 'x' | 'o' | ''
-export type CellIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
-
-export type Player = 'x' | 'o'
-export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell]
-
-export interface Game {
-    // this is 9 cells
-    currentPlayer: Player
-    cells: Cell[]
-    winCondition: WinCondition
-}
+import { Game, CellIndex, Board, WinCondition, Player, VictoryPattern } from './shared/types'
 
 // modify these game lobbies over time and sync the data to the clients using web sockets or polling
 
@@ -23,8 +12,6 @@ export const initialGameState: Game = {
 // [1, 2, 3]
 // [4. 5. 6]
 // [7, 8, 9]
-
-export type VictoryPattern = [CellIndex, CellIndex, CellIndex]
 
 const victoryPatterns: VictoryPattern[] = [
     [0, 1, 2], // top row
@@ -42,11 +29,6 @@ const victoryPatterns: VictoryPattern[] = [
 // draw
 // player x win
 // player y win
-
-type WinCondition = {
-    playerWon: Player | null, // null if nobody won
-    result: 'win' | 'tie' | null // null if you should continue play
-}
 
 export const getWinCondition = (board: Board): WinCondition => {
     // 1. Check for victory patterns
